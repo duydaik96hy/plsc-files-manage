@@ -1,0 +1,25 @@
+node_modules/
+dist/
+/coverage
+/junit.xml
+# **/db
+
+# You should not ignore Jest's snapshot, as they are required to perform the snapshot test in CI.
+# https://jestjs.io/docs/en/snapshot-testing.html#should-snapshot-files-be-committed
+
+
+.DS_Store
+.store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+**/*.log
+
+
+# editor directories
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.local

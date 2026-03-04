@@ -1,0 +1,28 @@
+# ======================================================================================
+# @see https://pm2.keymetrics.io/docs/usage/application-declaration/
+# @author Duy
+
+apps:
+  - script: ./dist/index.js
+    name: "eight-uploads-api"
+    # The cluster mode allows networked Node.js applications (http(s)/tcp/udp server) to be scaled across all CPUs available, without any code modifications. 
+    # This greatly increases the performance and reliability of your applications, depending on the number of CPUs available.
+    # https://pm2.keymetrics.io/docs/usage/cluster-mode/    
+    exec_mode: cluster
+    # https://pm2.io/docs/runtime/guide/development-tools/
+    watch: ["dist"]
+    ignore_watch: ["dist/users", "dist/taps", "dist/products", "node_modules"]
+    watch_options:
+      usePolling: true          # When working with NFS devices you’ll need to set usePolling: true as stated in this chokidar issue.
+    env:
+      NODE_ENV: development
+    env_qa:
+      NODE_ENV: qa
+    env_production:
+      NODE_ENV: production
+  # - script: ./worker.js
+  #   name: "api-worker"
+  #   exec_mode: cluster
+  #   instances: 4
+  #   autorestart: false
+  #   cron_restart: "0 0 * * *"
