@@ -7,6 +7,8 @@ import http from "http";
 import { UsersRouter } from "./router/Users";
 import { TapsRouter } from "./router/Taps";
 import { ProductsRouter } from "./router/Products";
+import { AttendanceRouter } from "./router/Attendance";
+import { LivestreamRouter } from "./router/Livestream";
 import path from "path";
 
 export const app = express();
@@ -30,6 +32,8 @@ app.set("view engine", "html");
 app.use("/users", express.static(path.join(__dirname, "users")));
 app.use("/taps", express.static(path.join(__dirname, "taps")));
 app.use("/products", express.static(path.join(__dirname, "products")));
+app.use("/attendance-photos", express.static(path.join(__dirname, "attendance")));
+app.use("/livestream-photos", express.static(path.join(__dirname, "livestream")));
 
 app.use("/swagger", express.static("swagger"), (_req, res) => {
   res.sendFile("./index.html", { root: serverConfig.cwd });
@@ -39,6 +43,8 @@ app.use("/swagger", express.static("swagger"), (_req, res) => {
 app.use("/user", UsersRouter);
 app.use("/tap", TapsRouter);
 app.use("/product", ProductsRouter);
+app.use("/attendance", AttendanceRouter);
+app.use("/livestream", LivestreamRouter);
 
 // Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
